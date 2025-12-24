@@ -4,6 +4,7 @@ import { HeaderComponent } from "./layout/header/header.component";
 import { HttpClient } from '@angular/common/http';
 import { Pagination } from './shared/models/pagination';
 import { Product } from './shared/models/product';
+import { ShopService } from './core/services/shop.service';
 
 @Component({
   selector: 'app-root',
@@ -13,13 +14,12 @@ import { Product } from './shared/models/product';
 })
 
 export class AppComponent implements OnInit {
+  private shopService = inject(ShopService);
   title = 'client';
-  private http = inject(HttpClient);
-  baseUrl = 'https://localhost:4001/api/';
   products: any[] = [];
 
   ngOnInit(): void {
-    this.http.get<Pagination<Product>>(this.baseUrl + 'products')
+    this.shopService.getProducts()
       .subscribe({
         next: response => this.products = response.data,
         error: error => console.error(error),
