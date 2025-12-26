@@ -10,3 +10,8 @@
     background-color: blue
   ));
 }
+
+// Load Material baseline styles (required!) 
+@include mat.core(); 
+// Load the Azure Blue prebuilt theme 
+@import '@angular/material/prebuilt-themes/azure-blue.css';
