@@ -11,6 +11,7 @@ import { FiltersDialogComponent } from './filters-dialog/filters-dialog.componen
 import { Product } from '../../shared/models/product';
 import { ShopParams } from '../../shared/models/shopParams';
 import { Pagination } from '../../shared/models/pagination';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-shop',
@@ -22,7 +23,8 @@ import { Pagination } from '../../shared/models/pagination';
     MatMenuTrigger,
     MatSelectionList,
     MatListOption,
-    MatPaginator
+    MatPaginator,
+    FormsModule
   ],
   templateUrl: './shop.component.html',
   styleUrl: './shop.component.scss',
@@ -55,6 +57,11 @@ export class ShopComponent {
         next: response => this.products = response,
         error: error => console.error(error)
       });
+  }
+
+  onSearchChange() {
+    this.shopParams.pageNumber = 1;
+    this.getProducts();
   }
 
   onSortChange(event: MatSelectionListChange) {
